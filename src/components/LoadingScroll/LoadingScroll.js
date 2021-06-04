@@ -23,6 +23,7 @@ export const LoadingScroll = () => {    // me llega locacion por parametro
 
     //For total
     useEffect(() => {
+      if(place.length !== 0) {
       setBusinesses([])
       axios(`/v3/businesses/search?location=${place}&term=parking&limit=1`, {
             headers: {
@@ -37,23 +38,28 @@ export const LoadingScroll = () => {    // me llega locacion por parametro
           // return setOffset(res.data.total - 10)
         }
       })
+    }
     }, [place]) 
 
     //To order by rating Bayesian average
     useEffect(() => {
+      if(place.length !== 0) {
       console.log(businesses.length)
         if(businesses.length > 99) {
           console.log(businesses)
           let ordenado = businesses.sort((a,b) =>  a.rating - b.rating)
           setBusinessesByRating(ordenado)
         }
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [businesses])
 
         console.log(place)
 
     // To request 100 bussinesses. To request 1000, just change the condition while
     useEffect(() => {
-      setBusinesses([])
+      if(place.length !== 0) {
+        setBusinesses([])
       let x = 0;
       while (x < 100) {
         axios(`/v3/businesses/search?location=${place}&term=parking&limit=50&offset=${x} `, {
@@ -71,7 +77,8 @@ export const LoadingScroll = () => {    // me llega locacion por parametro
         console.log(e)
       })
         x = x + 50
-      }
+      }}
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [total])
 
     function handleChange (page) {
