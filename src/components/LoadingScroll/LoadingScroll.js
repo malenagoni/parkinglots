@@ -25,7 +25,7 @@ export const LoadingScroll = () => {    // me llega locacion por parametro
     useEffect(() => {
       if(place.length !== 0) {
       setBusinesses([])
-      axios(`https://cryptic-headland-94862.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${place}&term=parking&limit=1`, {
+      axios(`https://cryptic-headland-94862.herokuapp.com/https://parkinglots.vercel.app/https://api.yelp.com/v3/businesses/search?location=${place}&term=parking&limit=1`, {
             headers: {
                 'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`
             }
@@ -62,7 +62,7 @@ export const LoadingScroll = () => {    // me llega locacion por parametro
         setBusinesses([])
       let x = 0;
       while (x < 100) {
-        axios(`https://cryptic-headland-94862.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${place}&term=parking&limit=50&offset=${x} `, {
+        axios(`https://cryptic-headland-94862.herokuapp.com/https://parkinglots.vercel.app/https://api.yelp.com/v3/businesses/search?location=${place}&term=parking&limit=50&offset=${x} `, {
           headers: {
               'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`
           }
