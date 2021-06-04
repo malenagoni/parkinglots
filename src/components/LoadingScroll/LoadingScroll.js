@@ -25,7 +25,7 @@ export const LoadingScroll = () => {    // me llega locacion por parametro
     useEffect(() => {
       if(place.length !== 0) {
       setBusinesses([])
-      axios(`/v3/businesses/search?location=${place}&term=parking&limit=1`, {
+      axios(`https://api.yelp.com/v3/businesses/search?location=${place}&term=parking&limit=1`, {
             headers: {
                 'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`
             }
@@ -62,13 +62,13 @@ export const LoadingScroll = () => {    // me llega locacion por parametro
         setBusinesses([])
       let x = 0;
       while (x < 100) {
-        axios(`/v3/businesses/search?location=${place}&term=parking&limit=50&offset=${x} `, {
+        axios(`https://api.yelp.com/v3/businesses/search?location=${place}&term=parking&limit=50&offset=${x} `, {
           headers: {
               'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`
           }
       }).then( r => {
         console.log(r)
-        r.data.businesses.forEach((e) => {
+        r.data?.businesses?.forEach((e) => {
           e.score = parseFloat((e.review_count * e.rating) / (e.review_count + 1)).toFixed(1);
         });
         setBusinesses((data) => data.concat(r.data.businesses));
